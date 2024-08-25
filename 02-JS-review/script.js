@@ -142,3 +142,107 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+/*
+const book = getBook(3);
+book;
+
+// const title = book.title;
+// const author = book.author;
+
+const { title, author, pages, publicationDate, genres, hasMovieAdaptation } = book;
+
+//---------------------------------------------------------------
+// const primaryGenre = genres[0];
+// const secondaryGenre = genres[1];
+
+const [ primaryGenre, secondaryGenre, ...otherGenres ] = genres;
+console.log(primaryGenre, secondaryGenre, otherGenres);
+
+//---------------------------------------------------------------
+
+const newGenres = [...genres, "epic fantasy"];
+newGenres;
+
+//---------------------------------------------------------------
+const updateBook = { 
+  ...book, 
+  // Adding a new property
+  moviePublicationDate: "2001-12-19", 
+
+  // Overweriting an existing property
+  // pages: 1210 
+};
+updateBook
+
+//---------------------------------------------------------------
+const summary = `${title}, a ${pages}-page look book, was written by ${author} and published in ${publicationDate.split("-")[0]}, The book has${hasMovieAdaptation ? "" : " not"} been adapted as a movie`;
+summary;
+
+//---------------------------------------------------------------
+const pagesRange = pages > 1000 ? "over a thousand" : "less than 1000";
+pagesRange;
+console.log(`The book has ${pagesRange} pages`);
+
+// function getYear(str) {
+//   return str.split("-")[0];
+// }
+
+// const getYear = (str) => {
+//   return str.split("-")[0];
+// } 
+
+const getYear = (str) => str.split("-")[0];
+
+
+console.log(getYear(publicationDate));
+
+console.log(true && "Some string");
+console.log(false && "Some string");
+console.log(hasMovieAdaptation && "This book has a movie");
+
+// fasle: 0, "", null, undefined
+console.log("jonas" && "Some string");
+console.log(0 && "Some string");
+
+console.log(true || "Some string");
+console.log(false || "Some string");
+
+console.log(book.translations.spanish);
+
+const spanishTranslation = book.translations.spanish || "NOT TRANSLATED";
+spanishTranslation;
+
+// console.log(book.reviews.librarything.reviewsCount);
+// const countWrong = book.reviews.librarything.reviewsCount || "do date";
+// countWrong;
+
+// const count = book.reviews.librarything.reviewsCount ?? "do date";
+// count;
+
+*/
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+}
+
+// console.log(getTotalReviewCount(book));
+
+const books = getBooks();
+books;
+
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map(book=>book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+    title: book.title,
+    author: book.author,
+    reviewsCount: getTotalReviewCount(book)
+  }));
+
+essentialData;
